@@ -6,7 +6,11 @@
  * };
  */
 
-
+struct ListNode {
+    int val;
+    struct ListNode *next;
+ };
+ 
 struct ListNode *mergeList(struct ListNode *l1, struct ListNode *l2)
 {
     if(l1 == NULL) return l2;
