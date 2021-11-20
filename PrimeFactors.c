@@ -14,6 +14,7 @@ void primeFactors(int n)
     primeFactors[0] = 1;
 
     // Print the number of 2s that divide n
+    // so that n is no longer divisible by 2
     while (n%2 == 0)
     {
         printf("n is now %d after divided by %d\n",n,  2);
@@ -22,11 +23,12 @@ void primeFactors(int n)
             primeFactors[loc++] = 2;
     }
  
-    // n must be odd at this point.  So we can skip
-    // one element (Note i = i +2)
+    // n must be odd at this point - since it can no longer be divided by 2.  
+    // So we can skip one element (Note i = i +2)
+
     for (int i = 3; i <= sqrt(n); i = i+2)
     {
-        // While i divides n, print i and divide n
+        // While i divides n, print i and n and divide n by i
         while (n%i == 0)
         {
             printf("n is %d and i is %d\n",n,  i);
@@ -34,12 +36,13 @@ void primeFactors(int n)
             if (primeFactors[loc - 1] != i)
                 primeFactors[loc++] = i;
         }
+        // when i no longer divides n, skip to next number (Note i = i +2)
     }
  
-    // This condition is to handle the case when n
+    // This condition is to handle the case when n - the number left after all the divisions
     // is a prime number greater than 2
     if (n > 2) {
-        printf ("final factor: %d \n", n);
+        printf ("the sqrt was: %d and the final factor: %d \n", len, n);
         if (primeFactors[loc - 1] != n)
             primeFactors[loc++] = n;
     }

@@ -60,6 +60,9 @@ int gcd(int a, int h)
 // it can be used as a standard to pass a symmetric key (like AES).
 // this code will not get into the diffie-helman key exchange.
 
+// ** finish research on how the following (fermat's little theorem) is related to RSA:
+// x^p - x = a multiple of p = a * p
+// https://crypto.stackexchange.com/questions/388/what-is-the-relation-between-rsa-fermats-little-theorem
 
 //// Code to demonstrate RSA algorithm
 int main()
@@ -74,7 +77,7 @@ int main()
     // Finding other part of public key.
     // e stands for encrypt
     double e = 2;
-    double phi = (p-1)*(q-1);
+    double phi = (p-1)*(q-1); // the totient of n
     while (e < phi)
     {
         // e must be co-prime to phi and
@@ -87,7 +90,10 @@ int main()
     
     // Private key (d stands for decrypt)
     // choosing d such that it satisfies
+    // de(mod totient of n) = 1
     // d*e = 1 + k * totient
+    // de=1 mod(ϕ(pq)) could be expressed as de=1+kϕ(pq) since in mod(ϕ(pq))
+    // adding kϕ(pq) to 1 is equivalent to adding a 0. i.e. kϕ(pq) in mod (ϕ(pq)) is 0.
     int k = 2;  // A constant value
     double d = (1 + (k*phi))/e;
   
@@ -114,3 +120,4 @@ int main()
 // 2. ./rsa
 
 // to add the math library add -lm
+// gcc RSA.c -o rsa - lm
